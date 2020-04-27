@@ -22,7 +22,7 @@ USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36
 ROBOTSTXT_OBEY = False
 
 LOG_ENABLED = True
-LOG_LEVEL = 'ERROR'
+LOG_LEVEL = 'DEBUG'
 
 IMAGES_STORE = 'images'
 
