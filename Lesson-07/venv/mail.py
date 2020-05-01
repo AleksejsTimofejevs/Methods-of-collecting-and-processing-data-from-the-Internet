@@ -76,7 +76,19 @@ for uniq_m in unique_mails:
             EC.presence_of_element_located(
                 (By.TAG_NAME, "h2"))
         )
-    print(title.text)
+    body = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located(
+            (By.CLASS_NAME, "letter__body"))
+    )
+    mail_from = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located(
+            (By.XPATH, "//div[@class='letter__author']/span"))
+    )
+    date = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located(
+            (By.XPATH, "// div[ @class ='letter__author'] / div[@ class ='letter__date']"))
+    )
+    print(title.text, body.text, mail_from.get_attribute('title'), date.text)
     pass
 
 driver.quit()
