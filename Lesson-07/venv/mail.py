@@ -12,9 +12,9 @@ import time
 client = MongoClient('localhost', 27017)
 db = client['mailru']
 
-def insert_product(hit):
-    db.mailru.update_one({"productId": hit['productId']},
-                                     {'$set': hit},
+def insert_product(mail):
+    db.mailru.update_one({"link": mail['link']},
+                                     {'$set': mail},
                                       upsert=True
                                       )
 
@@ -88,7 +88,15 @@ for uniq_m in unique_mails:
         EC.presence_of_element_located(
             (By.XPATH, "// div[ @class ='letter__author'] / div[@ class ='letter__date']"))
     )
-    print(title.text, body.text, mail_from.get_attribute('title'), date.text)
+
+    insert_product({
+        'link': uniq_m,
+        'title': title.text,
+        'body': body.text,
+        'from': mail_from.get_attribute('title'),
+        'date': date.text
+    })
+
     pass
 
 driver.quit()
